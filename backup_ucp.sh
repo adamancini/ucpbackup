@@ -26,10 +26,3 @@ docker run --rm -i \
   --passphrase $UCP_PASSWORD \
   > "/backup/$(date --iso-8601)-$(hostname)-ucp-backup.tar"
 
-
-#echo "Turning off docker daemon to ensure a consistent swarm backup."
-#systemctl stop docker.service
-#tar cvf /tmp/$(date --iso-8601)-$(hostname)-swarm-backup.tar /var/lib/docker/swarm
-#echo "Restarting docker daemon"
-#systemctl start docker.service
-
