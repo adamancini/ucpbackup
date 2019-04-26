@@ -14,7 +14,8 @@
     docker service create -d \
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
       --mount source=dtrbackup,target=/tmp/backup \
-      --restart-condition=none \
+      --restart-condition=any \
+      --restart-delay 24h \
       --constraint=node.role==manager \
       support/ucpbackup:latest
     ```
