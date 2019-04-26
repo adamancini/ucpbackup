@@ -26,7 +26,8 @@ services:
   dtr:
     deploy:
       restart_policy:
-        condition: none
+        condition: any
+        delay: 24h
       replicas: 1
       placement:
         constraints:
@@ -49,7 +50,8 @@ services:
   ucp:
     deploy:
       restart_policy:
-        condition: none
+        condition: any
+        delay: 24h
       replicas: 1
       placement:
         constraints:
