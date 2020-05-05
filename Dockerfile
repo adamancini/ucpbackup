@@ -1,5 +1,5 @@
 FROM alpine
-ENV DOCKERVERSION=18.03.1-ce
+ENV DOCKERVERSION=19.03.1
 
 RUN apk update && apk upgrade && apk add bash curl jq coreutils
 RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKERVERSION}.tgz \
