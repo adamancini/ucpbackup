@@ -5,12 +5,11 @@ services:
       restart_policy:
         condition: any
         delay: 24h
-      replicas: 1
       placement:
         constraints:
           - node.role == worker
           - node.labels.com.docker.ucp.collection.system == true
-    image: adamancini/dtrbackup
+    image: adamancini/dtrbackup:2.7
     environment:
       UCP_USER: admin
       UCP_URL: ucp.test.mira.annarchy.net
@@ -29,11 +28,10 @@ services:
       restart_policy:
         condition: any
         delay: 24h
-      replicas: 1
       placement:
         constraints:
           - node.role == manager
-    image: adamancini/ucpbackup
+    image: adamancini/ucpbackup:3.2
     environment:
       UCP_USER: admin
     secrets:

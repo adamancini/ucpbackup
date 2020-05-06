@@ -1,15 +1,18 @@
 ### Usage
 
-1) Load UCP client bundle
-
-
-2) Create Docker Secret containing password for backup user
-
+- Load UCP client bundle
     ```
-    echo "password" | docker secret create backuppass -
+    cd ucp-admin-bundle
+    source env.sh
     ```
 
-3) Schedule service
+- Create Docker Secret containing password for backup user
+    ```
+    echo "mySuperSecretPassPhrase" | docker secret create backuppass -
+    # secret "backuppass" created
+    ```
+
+- Schedule service
     ```
     docker service create -d \
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
@@ -17,9 +20,10 @@
       --restart-condition=any \
       --restart-delay 24h \
       --constraint=node.role==manager \
-      support/ucpbackup:latest
+      adamancini/ucpbackup:3.2
     ```
 
+- full Docker Compose example
 ```
 version: '3.7'
 services:
@@ -28,15 +32,14 @@ services:
       restart_policy:
         condition: any
         delay: 24h
-      replicas: 1
       placement:
         constraints:
           - node.role == worker
-          - node.labels.dtr == true 
-    image: support/dtrbackup
+          - node.labels.com.docker.ucp.collection.system == true
+    image: adamancini/dtrbackup:2.7
     environment:
       UCP_USER: admin
-      UCP_URL: ucp.example.org
+      UCP_URL: ucp.test.mira.annarchy.net
     secrets:
       - source: backuppass
         target: password
@@ -52,14 +55,12 @@ services:
       restart_policy:
         condition: any
         delay: 24h
-      replicas: 1
       placement:
         constraints:
           - node.role == manager
-    image: support/ucpbackup
+    image: adamancini/ucpbackup:3.2
     environment:
       UCP_USER: admin
-      UCP_URL: ucp.example.org
     secrets:
       - source: backuppass
         target: password
@@ -70,13 +71,11 @@ services:
       - source: /var/run/docker.sock
         target: /var/run/docker.sock
         type: bind
-
 volumes:
   ucpbackup:
   dtrbackup:
-  
 secrets:
   backuppass:
-    external: true 
+    external: true
 ```
 
