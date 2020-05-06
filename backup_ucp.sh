@@ -27,8 +27,7 @@ docker container run --rm -i\
 
 echo "Rotate backups"
 find /backup/*-ucp-backup.tar -exec ls -lh {} +;
-
-echo "Found backup tarballs older than ${MAX_AGE} days"
+echo "Checking for backup tarballs older than ${MAX_AGE} days"
 find /backup/*-ucp-backup.tar -mtime +"${MAX_AGE}" -exec ls -lh {} +;
-
 find /backup/*-ucp-backup.tar -mtime +"${MAX_AGE}" -delete
+echo "Done"
