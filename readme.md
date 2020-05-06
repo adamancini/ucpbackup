@@ -1,5 +1,4 @@
 ### Usage
-
 - Load UCP client bundle
     ```
     cd ucp-admin-bundle
@@ -23,7 +22,7 @@
       adamancini/ucpbackup:3.2
     ```
 
-- full Docker Compose example
+##### full Docker Compose example
 ```
 version: '3.7'
 services:
