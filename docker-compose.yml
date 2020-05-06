@@ -9,11 +9,10 @@ services:
       placement:
         constraints:
           - node.role == worker
-          - node.labels.dtr == true
-    image: support/dtrbackup
+          - node.labels.com.docker.ucp.collection.system == true
+    image: adamancini/dtrbackup
     environment:
       UCP_USER: admin
-      UCP_URL: ucp.aws.annarchy.net
     secrets:
       - source: backuppass
         target: password
@@ -27,13 +26,13 @@ services:
   ucp:
     deploy:
       restart_policy:
-        condition:  any
+        condition: any
         delay: 24h
       replicas: 1
       placement:
         constraints:
           - node.role == manager
-    image: support/ucpbackup
+    image: adamancini/ucpbackup
     environment:
       UCP_USER: admin
       UCP_URL: ucp.aws.annarchy.net
@@ -47,11 +46,9 @@ services:
       - source: /var/run/docker.sock
         target: /var/run/docker.sock
         type: bind
-
 volumes:
   ucpbackup:
   dtrbackup:
-
 secrets:
   backuppass:
     external: true
