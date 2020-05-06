@@ -13,6 +13,7 @@ services:
     image: adamancini/dtrbackup
     environment:
       UCP_USER: admin
+      UCP_URL: ucp.test.mira.annarchy.net
     secrets:
       - source: backuppass
         target: password
@@ -35,7 +36,6 @@ services:
     image: adamancini/ucpbackup
     environment:
       UCP_USER: admin
-      UCP_URL: ucp.aws.annarchy.net
     secrets:
       - source: backuppass
         target: password
