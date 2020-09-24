@@ -1,7 +1,7 @@
 FROM alpine
 ENV DOCKERVERSION=19.03.1
 ENV MAX_AGE=30
-
+ENV DOCKERHUB_ORGANIZATION=mirantis
 RUN apk update && apk upgrade && apk add bash curl jq coreutils
 RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKERVERSION}.tgz \
   && tar xzvf docker-${DOCKERVERSION}.tgz --strip 1 \

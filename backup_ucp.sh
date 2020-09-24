@@ -20,7 +20,7 @@ docker container run --rm -i\
   --name ucp \
   --log-driver none \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  docker/ucp:"${UCP_VERSION}" backup \
+  "${DOCKERHUB_ORGANIZATION}"/ucp:$UCP_VERSION backup \
   --debug \
   --passphrase "${UCP_PASSWORD}" \
   > "/backup/$(date --iso-8601)-$(hostname)-ucp-backup.tar"
