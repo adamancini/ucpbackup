@@ -9,7 +9,7 @@ services:
         constraints:
           - node.role == worker
           - node.labels.com.docker.ucp.collection.system == true
-    image: adamancini/dtrbackup:2.7
+    image: adamancini/dtrbackup:2.8
     environment:
       UCP_USER: admin
       UCP_URL: ucp.test.mira.annarchy.net
@@ -31,7 +31,7 @@ services:
       placement:
         constraints:
           - node.role == manager
-    image: adamancini/ucpbackup:3.2
+    image: adamancini/ucpbackup:3.3
     environment:
       UCP_USER: admin
     secrets:
